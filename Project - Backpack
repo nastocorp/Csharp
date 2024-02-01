@@ -1,0 +1,66 @@
+using System;
+
+namespace Programming_Exercise2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            // Store an item in the program
+            // Display the item on the screen
+            // Clear or reset the list
+            // Exit the program
+
+            bool myBool = true;
+            string input = "";
+
+            while (myBool)
+            {
+                Console.WriteLine("\nWelcome to Exercise - Backpack!\r\n");
+                Console.WriteLine("[1] - Add an item");
+                Console.WriteLine("[2] - Display content");
+                Console.WriteLine("[3] - Clear content");
+                Console.WriteLine("[4] - Exit the program");
+                Console.Write("\r\nChoose an option [1-4]: ");
+
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        {
+                            // Here, you input an item that will be displayed on the console
+                            Console.Write("Please enter an item: ");
+                            input = Console.ReadLine();
+                            Console.WriteLine("The item you entered is: " + input);
+                        }
+                        break;
+
+                    case 2:
+                        // Display the item that was entered
+                        Console.WriteLine("\r\nThe item you entered is: " + input);
+                        break;
+
+                    case 3:
+                        // Clear the console and return to the menu
+                        Console.Clear();
+                        break;
+
+                    case 4:
+                        // Exit the program and thank the user
+                        Console.WriteLine("Thank you for visiting!");
+                        myBool = false;
+                        break;
+
+                    default:
+                        // If a choice outside of 1-4 is selected, display an error message
+                        input = "\r\nI'm sorry, but I don't understand your choice! ";
+                        Console.WriteLine(input);
+                        Console.WriteLine("You must choose an option between [1-4]. ");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+        }
+    }
+}
