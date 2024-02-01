@@ -1,173 +1,109 @@
 using System;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-
-namespace Examination_Prog1_Bloggen
+namespace Examination_Programming1_Blog
 {
     internal class Program
     {
 
-        public class Me                                      // Deklarerar en ny klass vid namnet "ME" 
+        public class Me
         {
-           
-
-            public string name;                              // Skapar en strängvariabel vid namnet namn
-            public string hobby;                             // Skapar en strängvariabel vid namnet hobbys
-            public int age;                                  // Variabeln ålder skapas 
-
+            public string name;
+            public string hobby;
+            public int age;
         }
 
         static void Main(string[] args)
         {
-            
-            // ====== METODEN VEM ÄR JAG? ======= 
-            // Deklarerar en ny variabel "VemärJag" i klassen "Me"
-            // Sparar in information om mig 
-            // Skriver ut mitt namn, hobbys och ålder. Även för inmatat information.
+            Me WhoAmI = new Me();
+            WhoAmI.name = "Test Test";
+            WhoAmI.hobby = "\nworking out, but also working with computers, \nwhich I've been doing since I was little.";
+            WhoAmI.age = 34;
+            Console.WriteLine("====== My name is " + WhoAmI.name + ", " + "my hobbies include " + WhoAmI.hobby + "I am " + WhoAmI.age + " years old! ======");
 
-            Me WhoamI = new Me();                              
-            WhoamI.name = "Tommy Oksanen";
-            WhoamI.hobby = "\natt styrketräna, men även hålla på med datorer, \nsom jag har gjort sedan jag var liten. ";
-            WhoamI.age = 34;         
-            Console.WriteLine("====== Jag heter " + WhoamI.name + ", " + "mina intressen på fritiden är, " + WhoamI.hobby + "Jag är " + WhoamI.age + " gammal! ======");
-
-            /*
-            Skapar en container av en textstring
-            Skapar boool som är sant eller falskt
-            Skapar en sträng-vektor 
-            Skapar int variabel
-            Skapar sträng variabel           
-            */
-
-            List<string[]> tommysBlogg = new List<string[]>();  
+            List<string[]> tommysBlog = new List<string[]>();
             string[] input = new string[3];
-            bool myBool = true;           
-            int number = 0;                                                            
+            bool myBool = true;
+            int number = 0;
             string userInput = "";
-            
-       
-            while (myBool)      // While används vid okänt antal iterationer  och  fortsätter tills ett villkort är sant                                               // While loop som går helatiden tills det blir falskt
+
+            while (myBool)
             {
-                // Välkommnar användren till - Bloggen -
-                //***** läser in menyn *****
-                //***** Ber användaren göra ett val *****
+                Console.WriteLine("\n\tWelcome to the Examination Blog!\n");
+                Console.WriteLine("[1] - Print all posts");
+                Console.WriteLine("[2] - Write a new post");
+                Console.WriteLine("[3] - Search for posts in the blog");
+                Console.WriteLine("[4] - Exit the blog");
+                Console.WriteLine("[5] - Clear content");
+                Console.Write("\nChoose between 1-5: ");
+                string menuChoice = Console.ReadLine();
 
-                Console.WriteLine("\n\tVälkommen till Examination - Bloggen!\n");
-                Console.WriteLine("[1] - Skriv ut alla inlägg");
-                Console.WriteLine("[2] - Skriv nytt inlägg");
-                Console.WriteLine("[3] - Sök inlägg i bloggen");
-                Console.WriteLine("[4] - Avsluta bloggen");
-                Console.WriteLine("[5] - Rensa innehållet");
-                Console.Write("\nVälj mellan 1-5: ");
-                string menyVal = Console.ReadLine();                                // Initierar variabeln som sedan används i switch-satsen, sparar även användarnes val
-
-                
-                switch (menyVal)   // Switch är bra för menyer, då den inte behöver testa varje villkor separat.Funkar med strängar, siffror ex. 
-                                    // Switch sats som innehåller variabnamnet "menyVal"
+                switch (menuChoice)
                 {
+                    case "1":
+                        Console.Write("\tYour saved entries: ");
+                        bool minParse = Int32.TryParse(userInput, out number);
 
-                    
-                    case "1": // Här skriver programmet ut användarens titel, inlägg och datum/tid
-                                                                                           
-                        Console.Write("\tDina sparade uppgifter: ");
-                        bool minParse = Int32.TryParse(userInput, out number);      // userinput = sänder in och skickar ut resultatet // Undantagshantering TryParse
-                                                                                    // vad använder matar in ska tryparse gå igenom utan att krasha,
-                                                                                    // vilket BOOL godkänner om det vart OK. 
-                                                                                    // även konverterar inmatningen till INT som sedan bool godkänner
-                             // Här anväder jag foreach som har direkt åtkomst
-                             // till varje element i listan. 
-                             // Jag la till ny variabel tommyBlogg
-                             // som sparas inmatning i main-bloggen.
-                             
-                        foreach (string[] tommyBlogg in tommysBlogg)                // foreach - loop går igenom sparade uppgifter, foreach är bra för att hantera listor på ett smidigt sätt
+                        foreach (string[] tommyBlog in tommysBlog)
                         {
-                            Console.WriteLine("\n\tTitel: " + tommyBlogg[0] + " " + "\n\tInlägg: " + " " + tommyBlogg[1] + " " + "\n\tDatum och tid: " + " " + tommyBlogg[2]);                            
+                            Console.WriteLine("\n\tTitle: " + tommyBlog[0] + " " + "\n\tPost: " + " " + tommyBlog[1] + " " + "\n\tDate and Time: " + " " + tommyBlog[2]);
                         }
                         Console.ReadLine();
                         Console.Clear();
                         break;
 
-                            //            
-                    case "2": // Här sparas användarens val av titel och inlägg, som sedan skriver ut datum och tid
-                        tommysBlogg.Add(input);                                     // Lägger till ny variabel "input" som hamnar i min main vektor Lista                       
-                        Console.Write("Skriv din titel: ");                                  
-                        input[0] = Console.ReadLine();                              // Här sparas titeln i index [0] i vektorn "tommysBlogg"      
+                    case "2":
+                        tommysBlog.Add(input);
+                        Console.Write("Write your title: ");
+                        input[0] = Console.ReadLine();
 
-                        Console.Write("Skriv ditt inlägg: ");                       // Här sparas inlägg i index [1] i vektorn "tommysBlogg"          
-                        input[1] = Console.ReadLine();                                       
+                        Console.Write("Write your post: ");
+                        input[1] = Console.ReadLine();
 
-                        input[2] = DateTime.Now.ToString();                         // Här sparas datum och tid i index [2] i vektorn "tommysBlogg"     
+                        input[2] = DateTime.Now.ToString();
 
-
-                        Console.WriteLine("\tDina svar har sparats!");              // Här läggs alla element ihop. 
+                        Console.WriteLine("\tYour responses have been saved!");
                         Console.ReadLine();
                         Console.Clear();
-                        break;                                                              
-                                                                     
-                    case "3":
+                        break;
 
-                        //***** Söker igenom titel i bloggen, som användaren inmatat ***** 
-                        Console.Write("\t Söker efter titel: ");                                
+                    case "3":
+                        Console.Write("\t Searching for title: ");
                         userInput = Console.ReadLine();
 
-
-                        //**** Här använder jag FOR-LOOP som skriver ut allting från min main Lista (tommysBlogg) om användaren skriver rätt titel. 
-                        // Använder FOR-loop för det används vid ett känt antal iterationer / loopar. Här är det bra för då används allting, inklusive "input"
-                        //* Du kan med hjälp av en for-loop enkelt loopa igenom en array för att exempelvis söka, sortera eller skriva ut.
-                        //***** For-loop går igenom listan och skriver ut varje enskilt element.
-                        // En linjär sökning *****  
-                        // VIKTIGT - For loop har ett inbyggt att avbryta sig själv. Fungerar bra med listor och vektorer.
-
-
-                        // ** Jag använde for-loopen för att söka igenom hela min vektor lista, som räknar från 0 och uppåt
-                        // sen använde I F för att kolla att det användaren matar in (alltså rätt titel) och om 
-                        // matchningen stämmer, skriver den ut allting.
-                        // sen är FOR bra för att kan använda else på ett bra sätt tycker jag, svårare med foreach
-                        // och FOR har en räknar 
-                        for (int i = 0; i < tommysBlogg.Count; i++)                  // Använder mig av Count - då det är en Lista och inte en Vektor                                   
-                        {                              
-                            string[] tommyBlogg = tommysBlogg[i]; // Skapar string variabel för att använda det i IF-satsen. 
-                            if (userInput.ToUpper() == tommyBlogg[0].ToUpper())      // Loopen fortsätter när användaren matat in rätt titel, och skriver ut alla inlägg                               
-                            {                                                                                          
-                                Console.WriteLine("\t Dina inlägg: \n\t Titel: " + (tommyBlogg[0] + "\n\t Inlägg: " + tommyBlogg[1] + 
-                                     "\n\t Publicerat: " + tommyBlogg[2] + "\n\t"));
-                            }
-                            //***** OM inte sökningen är korrekt, visas felmeddelande *****
-                            else 
+                        for (int i = 0; i < tommysBlog.Count; i++)
+                        {
+                            string[] tommyBlog = tommysBlog[i];
+                            if (userInput.ToUpper() == tommyBlog[0].ToUpper())
                             {
-                                Console.WriteLine("Det du sökte finns inte i registret, vänligen försök igen!"); 
+                                Console.WriteLine("\t Your posts: \n\t Title: " + (tommyBlog[0] + "\n\t Post: " + tommyBlog[1] +
+                                     "\n\t Published: " + tommyBlog[2] + "\n\t"));
+                            }
+                            else
+                            {
+                                Console.WriteLine("What you searched for is not in the register, please try again!");
                             }
                         }
                         Console.ReadLine();
                         Console.Clear();
-                        break; 
-
-                    
-                    case "4": //***** Avslutar programmet *****
-                        Console.WriteLine("\nAvsluta programmet. Tack för ditt besök!");
-                        myBool = false;                                                 // Här stänger "myBool" ned programmet
-                        break;                                                                  
-                
-                  //***** OMINITIALISERAR tommysBlogg listan ***** 
-                    case "5": // Rensar alla inlägg 
-                        tommysBlogg.Clear();                      
-                        Console.WriteLine("\n========= Nu har alla inlägg raderats! =========");
                         break;
 
-                    //***** OM användaren matar in fel i menyval. Meddelas användaren att mata in rätt.
-                    //***** Felmeddelandet markeras med röd text. *****
+                    case "4":
+                        Console.WriteLine("\nExiting the program. Thank you for your visit!");
+                        myBool = false;
+                        break;
+
+                    case "5":
+                        tommysBlog.Clear();
+                        Console.WriteLine("\n========= All posts have now been deleted! =========");
+                        break;
+
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("\n========= ERROR! Du måste välja menyval [1 - 5] ========="); 
-                        Console.ResetColor();                        
-                        break;           
-                        
+                        Console.WriteLine("\n========= ERROR! You must choose menu option [1 - 5] =========");
+                        Console.ResetColor();
+                        break;
                 }
             }
         }
